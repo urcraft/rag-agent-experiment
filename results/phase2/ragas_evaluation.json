@@ -1,0 +1,20 @@
+{
+  "dataset": "scifact",
+  "sample_size": 10,
+  "generation_model": "qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf",
+  "chunk_size": 512,
+  "retrieval_strategy": "vector",
+  "reranker": "disabled",
+  "metric_means": {
+    "faithfulness": 0.9343078717589378,
+    "answer_relevancy": 0.921547994017601,
+    "context_precision": 0.90194650888443,
+    "context_recall": 0.9666692346334458
+  },
+  "performance": {
+    "ttft_seconds_mean": 3.1939997288020097,
+    "tokens_per_second_mean": 6.622575616283375,
+    "latency_seconds_mean": 10.7486063852004,
+    "peak_ram_gb": 2.5789146423339844
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "generation_model": {
+    "name": "gpt-oss-120b",
+    "display_name": "gpt-oss-120B (high)",
+    "parameters": "117B total / 5.1B active",
+    "quantization": "Q6",
+    "format": "GGUF",
+    "gguf_source": "https://huggingface.co/ggml-org/gpt-oss-120b-GGUF",
+    "memory_required_gb": 100.91,
+    "moe": true,
+    "active_parameters": "5.1B",
+    "leaderboard_rank": {
+      "lmarena": 126,
+      "artificial_analysis": 1
+    },
+    "leaderboard_details": {
+      "lmarena_basis": "Overall rank on https://lmarena.ai/leaderboard for gpt-oss-120b at run time.",
+      "artificial_analysis_basis": "Highest Artificial Analysis Intelligence Index among the feasible open-weight shortlist considered in Phase 1.",
+      "artificial_analysis_intelligence_index": 33.27,
+      "license": "Apache 2.0",
+      "weights_source": "https://huggingface.co/openai/gpt-oss-120b"
+    },
+    "selection_rationale": [
+      "Qwen3-235B-A22B and DeepSeek V3.2 exceed the machine's practical unified-memory budget.",
+      "gpt-oss-120b is the only preferred MoE candidate that both fits and has GGUF availability.",
+      "MoE is preferred on this 273 GB/s-class bandwidth-limited system because only active parameters dominate inference bandwidth."
+    ]
+  },
+  "embedding_model": {
+    "name": "BAAI/bge-large-en-v1.5",
+    "memory_required_gb": 0.77,
+    "mteb_retrieval_rank": 69,
+    "selection_rationale": "Best retrieval-rank among preferred embedding candidates that comfortably fits residual memory."
+  },
+  "backend": {
+    "name": "llama.cpp",
+    "cuda": true,
+    "build_flags": "cmake -B build -DGGML_CUDA=ON -DGGML_CUDA_FA_ALL_QUANTS=ON -DCMAKE_CUDA_ARCHITECTURES=121 -DGGML_NATIVE=ON",
+    "runtime_flags": "--no-mmap --flash-attn"
+  },
+  "memory_summary": {
+    "total_gb": 111.43,
+    "generation_model_gb": 100.91,
+    "embedding_model_gb": 0.77,
+    "os_reserve_gb": 6.0,
+    "headroom_gb": 3.75
+  },
+  "selection_inputs": {
+    "preferred_generation_candidates": [
+      "Qwen3-235B-A22B",
+      "DeepSeek-V3",
+      "GPT-OSS-120B"
+    ],
+    "preferred_embedding_candidates": [
+      "BAAI/bge-large-en-v1.5",
+      "nomic-ai/nomic-embed-text-v1.5",
+      "Snowflake/snowflake-arctic-embed-l"
+    ],
+    "effective_budget_gb_from_memory_budget": 103.93
+  },
+  "notes": [
+    "Artificial Analysis ranks were resolved via live model-page intelligence scores because the public page exposes scores more reliably than a stable ordinal API.",
+    "MTEB retrieval ranks were scraped live from the Hugging Face MTEB leaderboard space.",
+    "Phase 1 stops here pending human approval before any Phase 2 downloads or benchmarking."
+  ]
+}

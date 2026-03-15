@@ -1,0 +1,57 @@
+{
+  "hardware_profile": {
+    "timestamp": "2026-03-14T18:37:31.422442+00:00",
+    "cpu": {
+      "architecture": "aarch64",
+      "model": "ARM Cortex-X925 + Cortex-A725",
+      "cores": 20,
+      "threads": 20,
+      "core_types": {
+        "Cortex-X925": 10,
+        "Cortex-A725": 10
+      }
+    },
+    "ram": {
+      "total_gb": 121.69,
+      "available_gb": 111.43,
+      "memtotal_kb": 127601292,
+      "memavailable_kb": 116840740
+    },
+    "gpu": {
+      "detected": true,
+      "name": "NVIDIA GB10",
+      "vram_gb": null,
+      "unified_memory": true,
+      "cuda_version": "13.0",
+      "compute_capability": "12.1",
+      "driver_version": "580.126.09",
+      "notes": "nvidia-smi reports memory.total as N/A / Not Supported; unified memory — use system RAM total as GPU memory budget."
+    },
+    "disk": {
+      "total_gb": 3788.8,
+      "available_gb": 3379.2,
+      "mount_point": "/"
+    }
+  },
+  "selected_config": {
+    "backend": "llama.cpp",
+    "generation_model": "qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf",
+    "approved_generation_model": "gpt-oss-120b",
+    "approved_quantization": "Q6",
+    "embedding_model": "BAAI/bge-large-en-v1.5",
+    "retrieval_strategy": "vector",
+    "chunk_size": 512,
+    "reranker": "disabled"
+  },
+  "metrics": {
+    "retrieval_recall_at_5": 0.7742777777777777,
+    "faithfulness": 0.9343078717589378,
+    "answer_relevancy": 0.921547994017601,
+    "context_precision": 0.90194650888443,
+    "context_recall": 0.9666692346334458,
+    "ttft_seconds": 3.1939997288020097,
+    "tokens_per_second": 6.622575616283375,
+    "peak_ram_gb": 2.5789146423339844,
+    "latency_per_query_seconds": 10.7486063852004
+  }
+}

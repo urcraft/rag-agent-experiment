@@ -1,0 +1,23 @@
+{
+  "dataset": "scifact",
+  "results": [
+    {
+      "strategy": "vector",
+      "chunk_size": 512,
+      "recall@5": 0.7742777777777777,
+      "mrr@5": 0.6904999999999999
+    },
+    {
+      "strategy": "bm25",
+      "chunk_size": 512,
+      "recall@5": 0.6158333333333333,
+      "mrr@5": 0.5131666666666667
+    },
+    {
+      "strategy": "hybrid",
+      "chunk_size": 512,
+      "recall@5": 0.7392222222222222,
+      "mrr@5": 0.6392777777777778
+    }
+  ]
+}

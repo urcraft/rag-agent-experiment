@@ -1,0 +1,8 @@
+models/
+llama.cpp/
+venv/
+datasets/
+*.gguf
+__pycache__/
+*.pyc
+*.pid

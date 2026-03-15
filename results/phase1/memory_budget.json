@@ -1,0 +1,285 @@
+{
+  "timestamp": "2026-03-14T18:37:31.422442+00:00",
+  "budget_basis": "system RAM available (unified memory GPU)",
+  "total_available_gb": 111.43,
+  "os_reserve_gb": 6.0,
+  "embedding_reserve_gb": 1.5,
+  "effective_budget_gb": 103.93,
+  "notes": [
+    "Unified-memory NVIDIA GB10 uses system RAM as the practical model budget.",
+    "Required memory = (parameters_billions * bits_per_weight / 8) * 1.15.",
+    "MoE models must fit full weights in memory, but only active parameters dominate bandwidth at inference."
+  ],
+  "models": [
+    {
+      "parameters_billions": 7,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 4.02,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 5.03,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 6.04,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 8.05,
+          "fits": true
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 16.1,
+          "fits": true
+        }
+      }
+    },
+    {
+      "parameters_billions": 13,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 7.47,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 9.34,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 11.21,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 14.95,
+          "fits": true
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 29.9,
+          "fits": true
+        }
+      }
+    },
+    {
+      "parameters_billions": 14,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 8.05,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 10.06,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 12.07,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 16.1,
+          "fits": true
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 32.2,
+          "fits": true
+        }
+      }
+    },
+    {
+      "parameters_billions": 27,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 15.52,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 19.41,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 23.29,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 31.05,
+          "fits": true
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 62.1,
+          "fits": true
+        }
+      }
+    },
+    {
+      "parameters_billions": 32,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 18.4,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 23.0,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 27.6,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 36.8,
+          "fits": true
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 73.6,
+          "fits": true
+        }
+      }
+    },
+    {
+      "parameters_billions": 70,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 40.25,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 50.31,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 60.37,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 80.5,
+          "fits": true
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 161.0,
+          "fits": false
+        }
+      }
+    },
+    {
+      "parameters_billions": 72,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 41.4,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 51.75,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 62.1,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 82.8,
+          "fits": true
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 165.6,
+          "fits": false
+        }
+      }
+    },
+    {
+      "parameters_billions": 120,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 69.0,
+          "fits": true
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 86.25,
+          "fits": true
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 103.5,
+          "fits": true
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 138.0,
+          "fits": false
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 276.0,
+          "fits": false
+        }
+      }
+    },
+    {
+      "parameters_billions": 235,
+      "quantizations": {
+        "Q4": {
+          "bits_per_weight": 4,
+          "required_memory_gb": 135.12,
+          "fits": false
+        },
+        "Q5": {
+          "bits_per_weight": 5,
+          "required_memory_gb": 168.91,
+          "fits": false
+        },
+        "Q6": {
+          "bits_per_weight": 6,
+          "required_memory_gb": 202.69,
+          "fits": false
+        },
+        "Q8": {
+          "bits_per_weight": 8,
+          "required_memory_gb": 270.25,
+          "fits": false
+        },
+        "FP16": {
+          "bits_per_weight": 16,
+          "required_memory_gb": 540.5,
+          "fits": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "accessed_at": "2026-03-14",
+  "notes": [
+    "This file records the leaderboard/model-ranking data actually consulted during the original Phase 1 session.",
+    "Some entries are variant-mismatched between sources because the Phase 1 pass used ad hoc page scraping rather than a normalized model registry.",
+    "LiveBench was not consulted during the original Phase 1 pass."
+  ],
+  "generation_model_shortlist_consulted": [
+    {
+      "model": "gpt-oss-120b",
+      "artificial_analysis": {
+        "model_page": "https://artificialanalysis.ai/models/gpt-oss-120b",
+        "display_name": "gpt-oss-120B (high)",
+        "intelligence_index": 33.27,
+        "rank_within_consulted_artificial_analysis_shortlist": 1,
+        "date_accessed": "2026-03-14"
+      },
+      "lmarena": {
+        "leaderboard_page": "https://lmarena.ai/leaderboard",
+        "slug_or_name_seen": "gpt-oss-120b",
+        "overall_rank_observed": 126,
+        "date_accessed": "2026-03-14"
+      }
+    },
+    {
+      "model": "qwen3-235b-a22b-instruct-2507",
+      "artificial_analysis": {
+        "model_page": "https://artificialanalysis.ai/models/qwen3-235b-a22b-instruct-2507",
+        "display_name": "Qwen3 235B A22B 2507 Instruct",
+        "intelligence_index": 24.96,
+        "rank_within_consulted_artificial_analysis_shortlist": 3,
+        "date_accessed": "2026-03-14"
+      },
+      "lmarena": {
+        "leaderboard_page": "https://lmarena.ai/leaderboard",
+        "slug_or_name_seen": "qwen3-235b-a22b-instruct-2507",
+        "overall_rank_observed": 48,
+        "date_accessed": "2026-03-14"
+      }
+    },
+    {
+      "model": "deepseek-v3-2",
+      "artificial_analysis": {
+        "model_page": "https://artificialanalysis.ai/models/deepseek-v3-2",
+        "display_name": "DeepSeek V3.2 (Non-reasoning)",
+        "intelligence_index": 32.09,
+        "rank_within_consulted_artificial_analysis_shortlist": 2,
+        "date_accessed": "2026-03-14"
+      },
+      "lmarena": {
+        "leaderboard_page": "https://lmarena.ai/leaderboard",
+        "slug_or_name_seen": "deepseek-v3.2-exp-thinking",
+        "overall_rank_observed": 45,
+        "date_accessed": "2026-03-14",
+        "note": "The LMArena lookup captured the DeepSeek V3.2 experimental reasoning variant rather than the exact Artificial Analysis page variant."
+      }
+    },
+    {
+      "model": "qwen3-32b-instruct",
+      "artificial_analysis": {
+        "model_page": "https://artificialanalysis.ai/models/qwen3-32b-instruct",
+        "display_name": "Qwen3 32B (Non-reasoning)",
+        "intelligence_index": 14.532286886975053,
+        "rank_within_consulted_artificial_analysis_shortlist": 5,
+        "date_accessed": "2026-03-14"
+      },
+      "lmarena": {
+        "leaderboard_page": "https://lmarena.ai/leaderboard",
+        "slug_or_name_seen": "qwen3-32b",
+        "overall_rank_observed": 138,
+        "date_accessed": "2026-03-14",
+        "note": "The LMArena lookup captured qwen3-32b rather than an explicit qwen3-32b-instruct label."
+      }
+    },
+    {
+      "model": "qwen2-5-72b-instruct",
+      "artificial_analysis": {
+        "model_page": "https://artificialanalysis.ai/models/qwen2-5-72b-instruct",
+        "display_name": "Qwen2.5 Instruct 72B",
+        "intelligence_index": 15.557766275790943,
+        "rank_within_consulted_artificial_analysis_shortlist": 4,
+        "date_accessed": "2026-03-14"
+      },
+      "lmarena": {
+        "leaderboard_page": "https://lmarena.ai/leaderboard",
+        "slug_or_name_seen": null,
+        "overall_rank_observed": null,
+        "date_accessed": "2026-03-14",
+        "note": "I searched for this model family on LMArena during Phase 1, but did not capture a normalized row/rank for qwen2-5-72b-instruct."
+      }
+    },
+    {
+      "model": "qwen2.5-32b-instruct",
+      "artificial_analysis": {
+        "model_page": "https://artificialanalysis.ai/models/qwen2.5-32b-instruct",
+        "display_name": "Qwen2.5 Instruct 32B",
+        "intelligence_index": 13.236526421623505,
+        "rank_within_consulted_artificial_analysis_shortlist": 6,
+        "date_accessed": "2026-03-14"
+      },
+      "lmarena": {
+        "leaderboard_page": "https://lmarena.ai/leaderboard",
+        "slug_or_name_seen": null,
+        "overall_rank_observed": null,
+        "date_accessed": "2026-03-14",
+        "note": "I searched for the Qwen2.5 32B family on LMArena during Phase 1, but did not capture a normalized row/rank for qwen2.5-32b-instruct."
+      }
+    }
+  ],
+  "embedding_model_candidates_consulted": [
+    {
+      "model": "BAAI/bge-large-en-v1.5",
+      "mteb_retrieval_rank_observed": 69,
+      "date_accessed": "2026-03-14"
+    },
+    {
+      "model": "nomic-ai/nomic-embed-text-v1.5",
+      "mteb_retrieval_rank_observed": 87,
+      "date_accessed": "2026-03-14"
+    },
+    {
+      "model": "Snowflake/snowflake-arctic-embed-l",
+      "mteb_retrieval_rank_observed": 105,
+      "date_accessed": "2026-03-14"
+    }
+  ]
+}

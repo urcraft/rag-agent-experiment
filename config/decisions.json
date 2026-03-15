@@ -1,0 +1,40 @@
+{
+  "test_corpus": {
+    "dataset": "scifact",
+    "source": "BEIR benchmark",
+    "reason": "Compact (5K docs, 300 queries), has ground-truth relevance labels, standard IR benchmark recognized by the OSSYM audience",
+    "fallback": "nfcorpus"
+  },
+  "ragas_judge": {
+    "strategy": "local_model_first",
+    "fallback": "If scores look nonsensical (everything >0.95 or <0.1), note the limitation and fall back to a cloud API, disclosing it in results"
+  },
+  "embedding_model_preference": {
+    "candidates": [
+      "BAAI/bge-large-en-v1.5",
+      "nomic-ai/nomic-embed-text-v1.5",
+      "Snowflake/snowflake-arctic-embed-l"
+    ],
+    "selection_method": "Pick top MTEB retrieval-ranked model that fits in residual memory"
+  },
+  "generation_model_preference": {
+    "prefer_moe": true,
+    "reason": "273 GB/s bandwidth is the bottleneck on DGX Spark. MoE models that only activate a fraction of parameters per token will be significantly faster than dense models of equivalent total size.",
+    "candidates_if_available_as_gguf": [
+      "Qwen3-235B-A22B",
+      "DeepSeek-V3",
+      "GPT-OSS-120B"
+    ],
+    "fallback_dense": "Qwen2.5-32B-Q4 if no MoE GGUF is available or download is too slow"
+  },
+  "inference_backend": {
+    "primary": "llama.cpp",
+    "reason": "Best GGUF support, confirmed working on GB10 with CUDA",
+    "known_good_build_flags": "cmake -B build -DGGML_CUDA=ON -DGGML_CUDA_FA_ALL_QUANTS=ON -DCMAKE_CUDA_ARCHITECTURES=121 -DGGML_NATIVE=ON",
+    "runtime_flags": "--no-mmap --flash-attn"
+  },
+  "reranker": {
+    "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "alternative": "BAAI/bge-reranker-v2-m3"
+  }
+}

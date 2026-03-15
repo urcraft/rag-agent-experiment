@@ -1,0 +1,19 @@
+{
+  "dataset": "scifact",
+  "results": [
+    {
+      "reranker": "disabled",
+      "strategy": "vector",
+      "chunk_size": 512,
+      "recall@5": 0.7742777777777777,
+      "mrr@5": 0.6904999999999999
+    },
+    {
+      "reranker": "enabled",
+      "strategy": "vector",
+      "chunk_size": 512,
+      "recall@5": 0.78,
+      "mrr@5": 0.6688333333333334
+    }
+  ]
+}
