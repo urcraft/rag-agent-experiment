@@ -43,14 +43,12 @@ Full results: [`results/experiment_report.md`](results/experiment_report.md) | [
 ├── scripts/
 │   ├── phase2_benchmark.py           # Main benchmark script
 │   └── finalize_phase2.py            # Post-processing and report generation
-├── results/
-│   ├── summary_table.json            # Combined metrics (machine-readable)
-│   ├── experiment_report.md          # Narrative report with tables and paper text
-│   ├── issues.md                     # Problems encountered and workarounds
-│   ├── phase1/                       # Hardware profile, memory budget, model selection
-│   └── phase2/                       # Benchmark JSONs, CSVs, logs
-├── claude_summary.md                 # Claude Code's analysis of Pi's results
-└── answers.md                        # Pi's answers to post-experiment review questions
+└── results/
+    ├── summary_table.json            # Combined metrics (machine-readable)
+    ├── experiment_report.md          # Narrative report with tables and paper text
+    ├── issues.md                     # Problems encountered and workarounds
+    ├── phase1/                       # Hardware profile, memory budget, model selection
+    └── phase2/                       # Benchmark JSONs, CSVs, logs
 ```
 
 ## How to reproduce
@@ -60,7 +58,7 @@ Full results: [`results/experiment_report.md`](results/experiment_report.md) | [
 3. `pi --provider openai --model gpt-5.4`
 4. Authenticate with `/login`, then run `/run-phase1` followed by `/run-phase2`
 
-The skill files are agent-agnostic — any coding agent with bash access can follow them. See [`SETUP_LOG.md`](SETUP_LOG.md) for detailed setup notes.
+The skill files are agent-agnostic — any coding agent with bash access can follow them.
 
 ## Known issues
 
