@@ -1,109 +1,75 @@
-# OSSYM 2026 Experiments — Automated Hardware-Aware RAG Configuration
+# OSSYM 2026 — Automated Hardware-Aware RAG Configuration
 
-## Session Handoff
+Experiments for a research paper on automated local RAG system configuration using an agent-based two-phase approach. See [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) for the full paper context.
 
-For another agent to resume, reproduce, or extend the completed experiments, read:
-- `EXPERIMENT_HANDOFF.md`
-- `results/experiment_report.md`
-- `results/summary_table.json`
-- `results/issues.md`
+## How it works
+
+A coding agent (Pi, powered by GPT-5.4) autonomously executes a two-phase algorithm:
+
+1. **Phase 1 — Infrastructure selection:** Profile hardware, compute memory budgets, query live leaderboards (LMArena, Artificial Analysis, MTEB), and select the best feasible model + backend configuration.
+2. **Phase 2 — RAG optimization:** Build llama.cpp, download models, index a test corpus (SciFact/BEIR), sweep chunk sizes, compare retrieval strategies, evaluate with RAGAS, and produce a final experiment report.
+
+The algorithm is encoded in agent-readable skill files under `.pi/skills/`:
+
+| Skill | Purpose |
+|-------|---------|
+| [`hardware-profiler`](.pi/skills/hardware-profiler/SKILL.md) | CPU/RAM/GPU/disk detection → JSON |
+| [`memory-budget`](.pi/skills/memory-budget/SKILL.md) | Memory budget per quantization level |
+| [`model-selector`](.pi/skills/model-selector/SKILL.md) | Leaderboard-driven model + backend selection |
+| [`rag-benchmarker`](.pi/skills/rag-benchmarker/SKILL.md) | llama.cpp build, RAG pipeline, 4 benchmark sweeps, RAGAS evaluation, experiment report |
+
+Trigger prompts: [`.pi/prompts/run-phase1.md`](.pi/prompts/run-phase1.md), [`.pi/prompts/run-phase2.md`](.pi/prompts/run-phase2.md)
 
 ## Hardware
 
-Phase 1 profiled the host as:
-- CPU: ARM `aarch64`, 20 cores / 20 threads
-- Core types: 10× Cortex-X925, 10× Cortex-A725
-- RAM: 121.69 GiB total, 111.43 GiB available at profiling time
-- GPU: NVIDIA GB10, CUDA 13.0, compute capability 12.1
-- GPU memory mode: unified memory
-- Disk available in workspace filesystem: ~3.38 TB
+DGX Spark (ARM64): 20-core Cortex-X925/A725, 121 GB unified memory, NVIDIA GB10 (CUDA 13.0, compute capability 12.1). Full profile in [`results/phase1/hardware_profile.json`](results/phase1/hardware_profile.json).
 
-Canonical source:
-- `results/phase1/hardware_profile.json`
+## Key results
 
-## Selected Configuration
+- **Phase 1** selected `gpt-oss-120b` (117B MoE, 5.1B active) as the best feasible model. It fit the memory budget on paper but failed at runtime during llama-server startup. Phase 2 fell back to `Qwen2.5-32B Q4`.
+- **Best retrieval config:** 512-token chunks, vector retrieval, no reranker — recall@5 = 0.774, MRR@5 = 0.690
+- **RAGAS scores** are proxy metrics (embedding-based), not true RAGAS — see [`results/issues.md`](results/issues.md)
 
-### Approved Phase 1 selection
-- Generation model: `gpt-oss-120b`
-- Quantization: `Q6`
-- Embedding model: `BAAI/bge-large-en-v1.5`
-- Backend: `llama.cpp` with CUDA
+Full results: [`results/experiment_report.md`](results/experiment_report.md) | [`results/summary_table.json`](results/summary_table.json)
 
-Canonical source:
-- `results/phase1/selected_config.json`
+## Repository structure
 
-### Actual Phase 2 execution config
-The approved `gpt-oss-120b` model was downloaded but failed during `llama-server` startup, so Phase 2 proceeded with the documented fallback model:
-- Generation model used in benchmarks: `qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf`
-- Embedding model: `BAAI/bge-large-en-v1.5`
-- Best retrieval strategy: `vector`
-- Best chunk size: `512`
-- Reranker kept: `disabled`
+```
+├── AGENTS.md                         # Agent instructions (auto-loaded by Pi)
+├── PROJECT_CONTEXT.md                # Paper context, venue, related work
+├── config/decisions.json             # Pre-made experiment decisions
+├── .pi/
+│   ├── prompts/                      # One-command phase triggers
+│   └── skills/                       # Phase 1 + Phase 2 algorithm as skill files
+├── scripts/
+│   ├── phase2_benchmark.py           # Main benchmark script
+│   └── finalize_phase2.py            # Post-processing and report generation
+├── results/
+│   ├── summary_table.json            # Combined metrics (machine-readable)
+│   ├── experiment_report.md          # Narrative report with tables and paper text
+│   ├── issues.md                     # Problems encountered and workarounds
+│   ├── phase1/                       # Hardware profile, memory budget, model selection
+│   └── phase2/                       # Benchmark JSONs, CSVs, logs
+├── EXPERIMENT_HANDOFF.md             # Detailed handoff for follow-on agents
+├── claude_summary.md                 # Claude Code's analysis of Pi's results
+└── answers.md                        # Pi's answers to post-experiment review questions
+```
 
-Canonical source:
-- `results/summary_table.json`
-- `results/issues.md`
+## How to reproduce
 
-## How to Reproduce
+1. Install Pi: `npm install -g @mariozechner/pi-coding-agent`
+2. `cd` into this directory
+3. `pi --provider openai --model gpt-5.4`
+4. Authenticate with `/login`, then run `/run-phase1` followed by `/run-phase2`
 
-### Environment and assets already present
-- `llama.cpp/` built locally with CUDA
-- `venv/` contains the Python environment used for Phase 2
-- models downloaded under `models/`
-- SciFact dataset downloaded under `datasets/`
+The skill files are agent-agnostic — any coding agent with bash access can follow them. See [`SETUP_LOG.md`](SETUP_LOG.md) for detailed setup notes.
 
-### Main reproducibility scripts
-- `scripts/phase2_benchmark.py`
-- `scripts/finalize_phase2.py`
+## Known issues
 
-### Typical reproduction flow
-1. Read `EXPERIMENT_HANDOFF.md`
-2. Activate the venv:
-   - `source venv/bin/activate`
-3. Start `llama-server` with the desired model
-4. Run:
-   - `python scripts/phase2_benchmark.py`
-   - `python scripts/finalize_phase2.py`
+1. `gpt-oss-120b` MXFP4 GGUF failed during tensor loading on GB10 unified memory — see [`results/issues.md`](results/issues.md)
+2. RAGAS evaluation hit the 4096-token context limit; reported scores are embedding-based proxies, not true RAGAS
+3. Fallback model (32B Q4) underutilizes the hardware — a 72B model would have been a better choice
 
-### Notes
-- If retrying the originally approved model, inspect:
-  - `results/issues.md`
-  - `results/phase2/logs/llama_server.log`
-- If reproducing the exact benchmark results from this session, use the fallback Qwen 32B Q4 model noted above.
+## License
 
-## Results
-
-### Phase 1 outputs
-- `results/phase1/hardware_profile.json`
-- `results/phase1/memory_budget.json`
-- `results/phase1/selected_config.json`
-
-### Phase 2 outputs
-- `results/phase2/chunk_size_sweep.json`
-- `results/phase2/retrieval_comparison.json`
-- `results/phase2/reranker_comparison.json`
-- `results/phase2/ragas_evaluation.json`
-- CSV companions in `results/phase2/`
-
-### Final summary metrics
-- retrieval recall@5: `0.7742777777777777`
-- faithfulness: `0.9343078717589378`
-- answer relevancy: `0.921547994017601`
-- context precision: `0.90194650888443`
-- context recall: `0.9666692346334458`
-- TTFT: `3.1939997288020097 s`
-- tokens/s: `6.622575616283375`
-- average latency/query: `10.7486063852004 s`
-
-Canonical summaries:
-- `results/summary_table.json`
-- `results/experiment_report.md`
-
-## Issues Encountered
-
-Main issues from this session:
-1. The approved `gpt-oss-120b` GGUF downloaded successfully but failed during llama.cpp server bring-up on this machine.
-2. Direct local RAGAS evaluation exceeded the server context window on several judge requests, so aggregate scores were repaired with an embedding-based fallback metric computation.
-
-Canonical issue log:
-- `results/issues.md`
+Experiment code and configuration files. Paper content in `PROJECT_CONTEXT.md` is not licensed for redistribution.
