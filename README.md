@@ -1,6 +1,6 @@
 # OSSYM 2026 — Automated Hardware-Aware RAG Configuration
 
-Experiments for a research paper on automated local RAG system configuration using an agent-based two-phase approach. See [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) for the full paper context.
+Experiments for a research paper on automated local RAG system configuration using an agent-based two-phase approach.
 
 ## How it works
 
@@ -36,7 +36,6 @@ Full results: [`results/experiment_report.md`](results/experiment_report.md) | [
 
 ```
 ├── AGENTS.md                         # Agent instructions (auto-loaded by Pi)
-├── PROJECT_CONTEXT.md                # Paper context, venue, related work
 ├── config/decisions.json             # Pre-made experiment decisions
 ├── .pi/
 │   ├── prompts/                      # One-command phase triggers
@@ -50,7 +49,6 @@ Full results: [`results/experiment_report.md`](results/experiment_report.md) | [
 │   ├── issues.md                     # Problems encountered and workarounds
 │   ├── phase1/                       # Hardware profile, memory budget, model selection
 │   └── phase2/                       # Benchmark JSONs, CSVs, logs
-├── EXPERIMENT_HANDOFF.md             # Detailed handoff for follow-on agents
 ├── claude_summary.md                 # Claude Code's analysis of Pi's results
 └── answers.md                        # Pi's answers to post-experiment review questions
 ```
@@ -72,4 +70,4 @@ The skill files are agent-agnostic — any coding agent with bash access can fol
 
 ## License
 
-Experiment code and configuration files. Paper content in `PROJECT_CONTEXT.md` is not licensed for redistribution.
+Experiment code and configuration files.
