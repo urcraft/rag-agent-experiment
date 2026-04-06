@@ -1,4 +1,4 @@
-# OSSYM 2026 - Automated Hardware-Aware RAG Configuration
+# Automated Hardware-Aware RAG Configuration
 
 Experiments for a research paper on automated local RAG system configuration using an agent-based two-phase approach.
 
